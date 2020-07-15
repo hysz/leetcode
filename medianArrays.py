@@ -28,34 +28,25 @@ def findMedianSortedArrays(nums1, nums2):
 
     total = len(nums1) + len(nums2)
     left = 0
-    right = 0
+    right = total
+
+    primary = 0
     
 
-    while n1.l < n1.h and n2.l < n2.h:
+    while n1.l < n1.h and n2.l < n2.h and left != right:
         if nums1[n1.m] < nums2[n2.m]:
             print("#1")
             # Update <n1>
             n1.l = n1.m + 1
             n1.m = int((n1.l + n1.h) / 2)
-            
-            # Update <n2>
-            n2.h = n2.m
-            n2.m = int((n2.l + n2.h) / 2)
-            
-            n1.primary = True
-            n2.primary = False
+
+            primary = 2
         else:
-            print("#2")
-            # Update <n1>
-            n1.h = n1.m
-            n1.m = int((n1.l + n1.h) / 2)
-            
             # Update <n2>
             n2.l = n2.m + 1
             n2.m = int((n2.l + n2.h) / 2)
 
-            n1.primary = False
-            n2.primary = True
+            primary = 1
 
         left = n1.m + 1 + n2.m - 1
         right = total - left - 1
@@ -63,9 +54,39 @@ def findMedianSortedArrays(nums1, nums2):
         print(n1)
         print(n2)
         print("----")
+
+    while n1.l < n1.h and left != right:
+        print("YAAAAAAAH")
+        primary = 1
+        if nums1[n1.m] < nums2[n2.m]:
+            n1.l = n1.m + 1
+        else:
+            n1.h = n1.m - 1
+        n1.m = int((n1.l + n1.h) / 2)
+
+        left = n1.m + 1 + n2.m - 1
+        right = total - left - 1
+
+        if (left == right):
+            break
+
+    while n2.l < n2.h and left != right:
+        print("YAAAAAAAH 2")
+        primary = 2
+        if nums2[n2.m] < nums1[n1.m]:
+            n2.l = n2.m + 1
+        else:
+            n2.h = n2.m - 1
+        n2.m = int((n2.l + n2.h) / 2)
+
+        left = n1.m + 1 + n2.m - 1
+        right = total - left - 1
+
+        if left == right:
+            break
             
     median = -99999999999
-    if n1.primary:
+    if primary == 1:
         median = nums1[n1.m]
     else:
         median = nums2[n2.m]
@@ -73,18 +94,6 @@ def findMedianSortedArrays(nums1, nums2):
 
     print("left: ", left)
     print("right: ", right)
-
-        
-    '''
-    if n1.l < n1.h:
-        if nums1[n1.m] < nums2[n2.m]:
-            n1.l = n1.m = n1.h
-        else:
-            n1.h = n1.m = n1.l
-
-    if n2.l < n2.h:
-        n2.l = n2.h = n2.m
-    '''
 
 
     merged = sorted(nums1 + nums2)
@@ -110,12 +119,12 @@ def findMedianSortedArrays(nums1, nums2):
 
 
 
-findMedianSortedArrays([2,4,6,8], [1,3,5,9,11])
+# findMedianSortedArrays([2,4,6,8], [1,3,5,9,11])
 
-# findMedianSortedArrays([1,2,3,4,5,6], [6,7,8,9,10])
+findMedianSortedArrays([1,2,3,4,5,6], [6,7,8,9,10])
 
 
-# WORKS - findMedianSortedArrays([2, 10], [1,3,5,9,11])
+# findMedianSortedArrays([2, 10], [1,3,5,9,11])
 
 
 
