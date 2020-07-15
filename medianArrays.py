@@ -48,64 +48,10 @@ def findMedianSortedArrays(nums1, nums2):
         n2.m = int((n2.l + n2.h) / 2)
         left = n1.m + 1 + n2.m - 1
         right = total - left - 1
-    
-    '''
-    while n1.l < n1.h and n2.l < n2.h and left != right:
-        if nums1[n1.m] < nums2[n2.m]:
-            print("#1")
-            # Update <n1>
-            n1.l = n1.m + 1
-            n1.m = int((n1.l + n1.h) / 2)
-
-            primary = 2
-        else:
-            # Update <n2>
-            n2.l = n2.m + 1
-            n2.m = int((n2.l + n2.h) / 2)
-
-            primary = 1
-
-        left = n1.m + 1 + n2.m - 1
-        right = total - left - 1
-
-        print(n1)
-        print(n2)
-        print("----")
-
-    while n1.l < n1.h and left != right:
-        print("YAAAAAAAH")
-        primary = 1
-        if nums1[n1.m] < nums2[n2.m]:
-            n1.l = n1.m + 1
-        else:
-            n1.h = n1.m - 1
-        n1.m = int((n1.l + n1.h) / 2)
-
-        left = n1.m + 1 + n2.m - 1
-        right = total - left - 1
-
-        if (left == right):
-            break
-
-    while n2.l < n2.h and left != right:
-        print("YAAAAAAAH 2")
-        primary = 2
-        if nums2[n2.m] < nums1[n1.m]:
-            n2.l = n2.m + 1
-        else:
-            n2.h = n2.m - 1
-        n2.m = int((n2.l + n2.h) / 2)
-
-        left = n1.m + 1 + n2.m - 1
-        right = total - left - 1
-
-        if left == right:
-            break
-    '''
-            
+     
 
     if total % 2 == 0:
-        raise Exception('not sure here')
+        # raise Exception('not sure here')
         median = (nums1[n1.m] + nums2[n2.m]) / 2
     else:
         median = min(nums1[n1.m], nums2[n2.m])
@@ -147,5 +93,5 @@ def findMedianSortedArrays(nums1, nums2):
 
 
 
-findMedianSortedArrays([1,11, 21, 48, 50, 100], [9, 12, 13, 19, 100, 110, 120])
+findMedianSortedArrays([1, 11], [9, 12, 13, 19, 100, 110, 120])
 
