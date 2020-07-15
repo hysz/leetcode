@@ -85,11 +85,11 @@ def findMedianSortedArrays(nums1, nums2):
         if left == right:
             break
             
-    median = -99999999999
-    if primary == 1:
-        median = nums1[n1.m]
+
+    if total % 2 == 0:
+        median = (nums1[n1.m] + nums2[n2.m]) / 2
     else:
-        median = nums2[n2.m]
+        median = min(nums1[n1.m], nums2[n2.m])
 
 
     print("left: ", left)
@@ -121,12 +121,12 @@ def findMedianSortedArrays(nums1, nums2):
 
 # findMedianSortedArrays([2,4,6,8], [1,3,5,9,11])
 
-findMedianSortedArrays([1,2,3,4,5,6], [6,7,8,9,10])
+# findMedianSortedArrays([1,2,3,4,5,6], [6,7,8,9,10])
 
 
 # findMedianSortedArrays([2, 10], [1,3,5,9,11])
 
 
 
-# FAILS - findMedianSortedArrays([2], [1,11])
+findMedianSortedArrays([1,11, 21, 48, 50, 100], [9, 12, 13, 19, 100, 110, 120])
 
