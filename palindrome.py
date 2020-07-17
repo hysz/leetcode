@@ -33,6 +33,9 @@ class Solution:
                 palindrome = s[i - n_matches + 1:i + n_matches + offset]
                 if len(palindrome) > len(longest_palindrome):
                     longest_palindrome = palindrome
+        
+        if s and not longest_palindrome:
+            longest_palindrome = s[0]
 
         return longest_palindrome
 
@@ -47,3 +50,6 @@ class Solution:
 #print(Solution().longestPalindrome("abba"))
 #print(Solution().longestPalindrome("abbababb"))
 #print(Solution().longestPalindrome("bbababba"))
+#print(Solution().longestPalindrome("abcdef"))
+print(Solution().longestPalindrome(""))
+
