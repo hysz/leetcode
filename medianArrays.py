@@ -28,33 +28,47 @@ def findMedianSortedArrays(nums1, nums2):
 
     total = len(nums1) + len(nums2)
     left = 0
-    right = total
+    right = 0
+    median = -99999999
 
     primary = 0
 
-    while n1.l < n1.h and n2.l < n2.h and left != right:
+    while n1.l < n1.h and n2.l < n2.h:
         if nums1[n1.m] < nums2[n2.m]:
-            if left < right:
+            if left <= right:
                 n1.l = n1.m + 1
+                median = nums2[n2.m]
             else:
                 n2.h = n2.m - 1
+                median = nums1[n1.m]
         else:
-            if left < right:
+            if left <= right:
                 n2.l = n2.m + 1
+                median = nums1[n1.m]
             else:
                 n1.h = n1.m - 1
-
+                median = nums2[n2.m]
+            
+        
+        left = n1.m+1 + n2.m+1 - 1
+        right = total - left - 1
+        if left == right:
+            print("Breaking")
+            break
         n1.m = int((n1.l + n1.h) / 2)
         n2.m = int((n2.l + n2.h) / 2)
-        left = n1.m + 1 + n2.m - 1
-        right = total - left - 1
+        
+        
+        # if left == right:
+            # break
      
-
+    '''
     if total % 2 == 0:
         # raise Exception('not sure here')
         median = (nums1[n1.m] + nums2[n2.m]) / 2
     else:
         median = min(nums1[n1.m], nums2[n2.m])
+    '''
 
 
     print("left: ", left)
