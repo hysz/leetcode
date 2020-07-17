@@ -13,10 +13,8 @@ class ListNode:
 class Solution:
 
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        l1_idx = 0
-        l2_idx = 0
         carry = 0
-        first = None
+        start = None
         prev = None
         while l1 or l2:
             sum = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
@@ -24,11 +22,11 @@ class Solution:
             carry = int(sum / 10)
             node = ListNode(remainder, None)
 
-            # Set prev.next/first to this node, if necessary.
+            # Set prev.next/start to this node, if necessary.
             if prev:
                 prev.next = node
             else:
-                first = node
+                start = node
 
             # Update `prev` to be this node
             prev = node
@@ -42,10 +40,10 @@ class Solution:
             
         # Handle carry over at end
         if carry:
-            # If carry isset then first/prev isset.
+            # If carry isset then start/prev isset.
             prev.next = ListNode(carry, None)
                 
-        return first
+        return start
 
 
 
@@ -72,6 +70,12 @@ a = ListNode(9, ListNode(9, ListNode(9, None)))
 b = ListNode(9, None)
 print(Solution().addTwoNumbers(a, b))
 '''
+
+'''
+print(Solution().addTwoNumbers(ListNode(1, None), None))
+print(Solution().addTwoNumbers(None, ListNode(1, None)))
+'''
+
         
         
         
