@@ -1,5 +1,7 @@
 class Solution:
-    def countMatches(self, s: str, prefix: str, i: int) -> int:
+    # Starting at index `i` in `str`, counts the number
+    # of matching characters in reversed(prefix)
+    def countMatches(self, s: str, i: int, prefix: str) -> int:
         s_idx = i
         prefix_idx = len(prefix) - 1
         while s_idx < len(s) and prefix_idx >= 0:
@@ -16,29 +18,22 @@ class Solution:
         longest_palindrome = ""
         prefix = ""
         for i,char in enumerate(s):
+            # We record the current prefix. We'll want to
+            # match the reverse of this prefix.
             prefix += char
 
-            print("PREFIX: ", prefix)
-            # check matches starting at i+1
-            n_matches = self.countMatches(s, prefix, i + 1)
-            if n_matches != 0:
-                print("Matches 1st: %d"%(n_matches))
-                palindrome = s[i - n_matches + 1:i + n_matches + 1]
-                print("FOUND: ", palindrome)
+            # We'll search for palindromes starting at `i+1` and `i+2`
+            # For offset=1, we handle cases like "abba"
+            # For offset=2, we handle cases like "aba"
+            for offset in [1, 2]:
+                n_matches = self.countMatches(s, i + offset, prefix)
+                if n_matches == 0:
+                    continue
+                
+                palindrome = s[i - n_matches + 1:i + n_matches + offset]
                 if len(palindrome) > len(longest_palindrome):
                     longest_palindrome = palindrome
 
-            # check matches starting at i+2
-            n_matches = self.countMatches(s, prefix, i + 2)
-            if n_matches != 0:
-                print("Matches 2nd: %d"%(n_matches))
-                palindrome = s[i - n_matches + 1:i + n_matches + 2]
-                print("FOUND: ", palindrome)
-                if len(palindrome) > len(longest_palindrome):
-                    longest_palindrome = palindrome
-
-            print("-------")
-            #break
         return longest_palindrome
 
                 
@@ -47,8 +42,8 @@ class Solution:
                 
 
             
-print(Solution().longestPalindrome("bab"))
+#print(Solution().longestPalindrome("bab"))
 #print(Solution().longestPalindrome("abb"))
 #print(Solution().longestPalindrome("abba"))
 #print(Solution().longestPalindrome("abbababb"))
-#print(Solution().longestPalindrome("bab"))
+#print(Solution().longestPalindrome("bbababba"))
