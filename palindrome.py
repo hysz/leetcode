@@ -1,18 +1,14 @@
 class Solution:
     def countMatches(self, s: str, prefix: str, i: int) -> int:
-        suffix = list(prefix[::-1])
-        print("suffix: ", suffix)
-        k = i
-        while suffix and k < len(s):
-            print("Comparing %s %s"%(s[k], suffix[0]))
-            if s[k] != suffix[0]:
+        s_idx = i
+        prefix_idx = len(prefix) - 1
+        while s_idx < len(s) and prefix_idx >= 0:
+            if s[s_idx] != prefix[prefix_idx]:
                 break
-            print("popping")
-            suffix = suffix[1:]
-            print(suffix)
-            k += 1
+            s_idx += 1
+            prefix_idx -= 1
         
-        n_matches = len(prefix) - len(suffix)
+        n_matches = len(prefix) - (prefix_idx + 1)
         return n_matches
 
 
@@ -51,6 +47,8 @@ class Solution:
                 
 
             
-#print(Solution().longestPalindrome("bab"))
-print(Solution().longestPalindrome("abba"))
+print(Solution().longestPalindrome("bab"))
+#print(Solution().longestPalindrome("abb"))
+#print(Solution().longestPalindrome("abba"))
+#print(Solution().longestPalindrome("abbababb"))
 #print(Solution().longestPalindrome("bab"))
