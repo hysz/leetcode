@@ -8,16 +8,10 @@ class Solution:
     def maxArea(self, heights: List[int]) -> int:
         max_area = 0
         max_x2 = len(heights) - 1
-        #total_iterations = 0
         
         for x1,y1 in enumerate(heights):
-            #print("(%d,%d)"%(x1,y1))
             # no area when height is zero
             if y1 == 0:
-                continue
-
-            # first check to see if we can even beat max area
-            if (max_x2 - x1) * y1 <= max_area:
                 continue
 
             # lets try to beat the max area
@@ -25,7 +19,6 @@ class Solution:
             x2 = max_x2
             while x2 >= min_x2_to_beat_max_area:
                 # check if any future iteration could do better
-                #total_iterations += 1
                 area = (x2 - x1) * min(y1, heights[x2])
                 if area > max_area:
                     max_area = area
@@ -33,7 +26,6 @@ class Solution:
 
                 x2 -= 1
 
-        #print("Total iterations = %d", total_iterations)
         return max_area
 
 '''
