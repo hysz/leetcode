@@ -47,7 +47,8 @@ class Solution:
             idx_of_next_repeating_char = lookup[c][i]
             j = i + 1
             while j < idx_of_next_repeating_char:
-                j = min(idx_of_next_repeating_char, lookup[s[j]][j])
+                idx_of_next_repeating_char = min(idx_of_next_repeating_char, lookup[s[j]][j])
+                j += 1
             
             longest_substr_len_from_i = j - i
             if longest_substr_len_from_i > longest_substr_len:
