@@ -23,5 +23,8 @@ class Solution:
         return output
         
 
-pprint(Solution().convert("PAYPALISHIRING", 3))
-pprint(Solution().convert("PAYPALISHIRING", 4))
+#pprint(Solution().convert("PAYPALISHIRING", 3))
+#pprint(Solution().convert("PAYPALISHIRING", 4))
+
+
+pprint(Solution().convert("GREG", 2))
