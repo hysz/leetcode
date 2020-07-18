@@ -10,6 +10,10 @@ class Solution:
                 break
             i += 1
 
+        # We done?
+        if i == len(s):
+            return 0
+
         # Return zero if next value is not +/-/numeric
         if not min_ascii <= ord(s[i]) <= max_ascii and not s[i] in ['+', '-']:
             return 0
@@ -18,11 +22,18 @@ class Solution:
         sign = None
         decoded_number = 0
         did_decode_number = False
-        for c in s:
-            c_in_ascii = ord(c)
+        while i < len(s):
+            # read next char
+            c = s[i]
+            i += 1
 
+            # get ascii and validate
+            c_in_ascii = ord(c)
             if not min_ascii <= c_in_ascii <= max_ascii:
                 if not did_decode_number:
+                    if sign:
+                        # cannot find the sign twice
+                        return 0
                     sign = c
                     continue
                 break
@@ -45,6 +56,7 @@ class Solution:
 
 
 print(Solution().myAtoi("0"))
+print(Solution().myAtoi("       "))
 print(Solution().myAtoi("10"))
 print(Solution().myAtoi("123"))
 print(Solution().myAtoi("-123"))
@@ -58,4 +70,4 @@ print(Solution().myAtoi("       2147483648"))
 print(Solution().myAtoi("       2147483647"))
 print(Solution().myAtoi("       -2147483649"))
 print(Solution().myAtoi("       -2147483648"))
-
+print(Solution().myAtoi("+-123"))
