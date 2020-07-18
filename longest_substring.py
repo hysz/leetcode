@@ -6,18 +6,19 @@ class Solution:
 
         '''
         We construct a lookup table that allows you to query for next occurence of a character.
+        We use len(s) to denote a non-existent index.
         Ex for string "abab"
             {
                 "a:
                 {
                     0: 2,
-                    2: -1,
+                    2: len(s),
                     -1: 2   // Used to lookup furthest occurence
                 },
                 "b":
                 {
                     1: 3,
-                    3: -1
+                    3: len(s)
                 }
             }
         '''
@@ -28,40 +29,32 @@ class Solution:
             if not c in lookup:
                 lookup[c] = {}
                 l = lookup[c]
-                l[i] = -1
+                l[i] = len(s)
                 l[-1] = i
             else:
                 l = lookup[c]
                 l[l[-1]] = i
-                l[i] = -1
+                l[i] = len(s)
                 l[-1] = i
             
         pprint(lookup)
             
-        # We now iterate through `str` a second time.
-        # The longest substring not containing the current
-        # character will be the distance to the next entry
-        # in the lookup table for that char. If there is no
-        # more entries than it's the end of the string.
+        # We trying forming a substring from each index `i` in `s`,
+        # using the lookup table to exit once we hit a repeated character.
         longest_substr_len = 0
+        longest_substr_len_from_i = 0
         for i,c in enumerate(s):
-            longest_substr_len_from_i = 0
-            if not lookup[c]:
-                longest_substr_len_from_i = len(s) - i
-            else:
-                longest_substr_len_from_i = lookup[c][0] - i
-                # remove from the lookup table, so that
-                # whenever you do lookup[c][0] it'll have
-                # the next occurence of c.
-                del lookup[c][0]
+            idx_of_next_repeating_char = lookup[c][i]
+            j = i + 1
+            while j < idx_of_next_repeating_char:
+                j = min(idx_of_next_repeating_char, lookup[s[j]][j])
             
+            longest_substr_len_from_i = j - i
             if longest_substr_len_from_i > longest_substr_len:
                 longest_substr_len = longest_substr_len_from_i
-
-            print("From `%d` we have %d"%(i,longest_substr_len_from_i))
 
         return longest_substr_len
 
 
-print(Solution().lengthOfLongestSubstring("abab"))
-#print(Solution().lengthOfLongestSubstring("abcabcbb"))
+#print(Solution().lengthOfLongestSubstring("abab"))
+print(Solution().lengthOfLongestSubstring("abcabcbb"))
