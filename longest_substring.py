@@ -1,8 +1,5 @@
-from pprint import pprint
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        print(s)
 
         '''
         We construct a lookup table that allows you to query for next occurence of a character.
@@ -37,8 +34,6 @@ class Solution:
                 l[i] = len(s)
                 l[-1] = i
             
-        pprint(lookup)
-            
         # We trying forming a substring from each index `i` in `s`,
         # using the lookup table to exit once we hit a repeated character.
         longest_substr_len = 0
@@ -57,5 +52,7 @@ class Solution:
         return longest_substr_len
 
 
+#print(Solution().lengthOfLongestSubstring(""))
+#print(Solution().lengthOfLongestSubstring("a"))
 #print(Solution().lengthOfLongestSubstring("abab"))
-print(Solution().lengthOfLongestSubstring("abcabcbb"))
+#print(Solution().lengthOfLongestSubstring("abcabcbb"))
