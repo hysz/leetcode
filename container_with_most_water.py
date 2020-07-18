@@ -28,20 +28,23 @@ class Solution:
                 continue
 
             # first check to see if we cannot beat max area
-            min_delta_x_to_beat = math.ceil(max_area / y1)
-            if max_x2 - x1 < min_delta_x_to_beat:
+            if (max_x2 - x1) * y1 <= max_area:
                 print("break1")
                 continue
 
+            min_delta_x_to_beat = math.ceil(max_area / y1)
             for x2 in range(max_x2, x1 + min_delta_x_to_beat - 1, -1):
-                if (x2 - p1.x) * p1.y <= max_area:
-                    print("Break2")
-                    break
-                    
-                volume = Solution.getArea(p1, Point(x2, heights[x2]))
-                if volume > max_area:
+
+                area = Solution.getArea(p1, Point(x2, heights[x2]))
+                if area > max_area:
                     print("Max area: [%d..%d] = %d"%(x1, x2, volume))
                     max_area = volume
+
+                    # check if any future iteration could do better
+                    if (x2 - 1 - x1) * y1 <= max_area:
+                        print("break 3")
+                        break
+                        
         
         return max_area
 
