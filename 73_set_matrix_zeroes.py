@@ -54,8 +54,8 @@ class Solution:
 
         #print_matrix(matrix)
         
-        print("min: (%d, %d)"%(min_i, min_j))
-        return
+        #print("min: (%d, %d)"%(min_i, min_j))
+        
         
 
         # Next move the columns over
@@ -78,7 +78,7 @@ class Solution:
 
                     # swap each cell of current column with that in `min_j`,
                     # storing the current row index in each cell of the current row
-                    for k in range(min_i, len(matrix)):
+                    for k in range(0, len(matrix)):
                         matrix[k][j] = matrix[k][min_j]
                         matrix[k][min_j] = j
 
@@ -93,7 +93,7 @@ class Solution:
             j = min_j - 1
             while j >= 0:
                 col = matrix[min_i][j]
-                for i in range(min_i, len(matrix)):
+                for i in range(0, len(matrix)):
                     matrix[i][j] = matrix[i][col]
                     matrix[i][col] = 0
                 j -= 1
