@@ -57,6 +57,7 @@ class Solution:
         #print("min: (%d, %d)"%(min_i, min_j))
         
         
+        
 
         # Next move the columns over
         i = 0
@@ -80,20 +81,22 @@ class Solution:
                     # storing the current row index in each cell of the current row
                     for k in range(0, len(matrix)):
                         matrix[k][j] = matrix[k][min_j]
-                        matrix[k][min_j] = j
+                        if k >= min_i:
+                            matrix[k][min_j] = j
 
                     min_j += 1
                 j += 1
             i += 1
         
         
+        #return
 
         # Move columns back
         if min_i < len(matrix):
             j = min_j - 1
             while j >= 0:
                 col = matrix[min_i][j]
-                for i in range(0, len(matrix)):
+                for i in range(min_i, len(matrix)):
                     matrix[i][j] = matrix[i][col]
                     matrix[i][col] = 0
                 j -= 1
@@ -154,11 +157,13 @@ matrix = [[0]]
 matrix = [[-4,-2147483648,6,-7,0],[-8,6,-8,-6,0],[2147483647,2,-9,-6,-10]]
 '''
 
-matrix = [[8,3,6,9,7,8,0,6],[0,3,7,0,0,4,3,8],[5,3,6,7,1,6,2,6],[8,7,2,5,0,6,4,0],[0,2,9,9,3,9,7,3]]
+#matrix = [[8,3,6,9,7,8,0,6],[0,3,7,0,0,4,3,8],[5,3,6,7,1,6,2,6],[8,7,2,5,0,6,4,0],[0,2,9,9,3,9,7,3]]
+
+matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
 
 print_matrix(matrix)
 Solution().setZeroes(matrix)
 print_matrix(matrix)
 
 print("-- EXPECTED --")
-print_matrix([[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,3,6,0,0,6,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]])
+#print_matrix([[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,3,6,0,0,6,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]])
