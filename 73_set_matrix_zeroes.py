@@ -24,19 +24,27 @@ class Solution:
             j = 0
             while j < len(matrix[0]):
                 if matrix[i][j] == 0:
+                    # store the (row + 1), unless the cell is zero and then store -(row + 1)
+                    
+
                     # swap each cell of current row with that in `min_i`,
                     # storing the current row index in each cell of the current row
                     for k in range(0, len(matrix[0])):
                         is_zero = matrix[i][k] == 0
                         matrix[i][k] = matrix[min_i][k]
 
+                        '''
                         if is_zero:
                             matrix[min_i][k] = 0 # so we catch it when we process columns in next for loop
                         elif i == 0:
                             matrix[min_i][k] = -1 # so we don't confuse it with '0'
                         else:
-                            matrix[min_i][k] = i
+                        '''
                         
+                        matrix[min_i][k] = i + 1
+                        if is_zero:
+                            matrix[min_i][k] *= -1
+
                     min_i += 1
 
                     # Hit up the next row
@@ -48,6 +56,7 @@ class Solution:
         
        # print("min: (%d, %d)"%(min_i, min_j))
         #return
+        
 
         # Next move the columns over
         i = 0
@@ -58,9 +67,14 @@ class Solution:
             j = min_j
             while j < len(matrix[0]):
                 #print("j: ", j)
-                if matrix[i][j] == 0:
+                if matrix[i][j] == 0 or (i < min_i and matrix[i][j] < 0):
                     
                     #print("FOUND AT (%d, %d)"%(i,j))
+
+
+                    # mark that we got this row
+                    for k in range(0, min_i):
+                        matrix[k][j] = abs(matrix[k][j])
 
                     # swap each cell of current column with that in `min_j`,
                     # storing the current row index in each cell of the current row
@@ -71,6 +85,8 @@ class Solution:
                     min_j += 1
                 j += 1
             i += 1
+        
+        
 
         # Move columns back
         if min_i < len(matrix):
@@ -82,17 +98,11 @@ class Solution:
                     matrix[i][col] = 0
                 j -= 1
 
+        
         # Move rows back
         i = min_i - 1
         while i >= 0:
-            row = [cell for cell in matrix[i] if cell != 0]
-            if row:
-                row = row[0]
-            else:
-                row = 0
-
-            if row == -1:
-                row = 0
+            row = abs(matrix[i][0]) - 1
             for j in range(0, len(matrix[0])):
                 matrix[i][j] = matrix[row][j]
                 matrix[row][j] = 0
@@ -139,8 +149,10 @@ matrix = [
     [1,2,1,3],
     [0,0,1,1]
 ]
-'''
 matrix = [[0]]
+'''
+matrix = [[-4,-2147483648,6,-7,0],[-8,6,-8,-6,0],[2147483647,2,-9,-6,-10]]
+
 print_matrix(matrix)
 Solution().setZeroes(matrix)
 print_matrix(matrix)
