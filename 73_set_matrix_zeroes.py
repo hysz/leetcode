@@ -53,11 +53,13 @@ class Solution:
         i = 0
         j = 0
         while i < len(matrix):
+
             #print("i: ", i)
             j = min_j
             while j < len(matrix[0]):
                 #print("j: ", j)
                 if matrix[i][j] == 0:
+                    
                     #print("FOUND AT (%d, %d)"%(i,j))
 
                     # swap each cell of current column with that in `min_j`,
@@ -83,7 +85,12 @@ class Solution:
         # Move rows back
         i = min_i - 1
         while i >= 0:
-            row = [cell for cell in matrix[i] if cell != 0][0]
+            row = [cell for cell in matrix[i] if cell != 0]
+            if row:
+                row = row[0]
+            else:
+                row = 0
+
             if row == -1:
                 row = 0
             for j in range(0, len(matrix[0])):
@@ -122,7 +129,8 @@ matrix = [
   [1,3,1,0]
 ]
 
-matrix = [[0]]
+
+'''
 '''
 matrix = [
     [0,0,0,5],
@@ -131,6 +139,8 @@ matrix = [
     [1,2,1,3],
     [0,0,1,1]
 ]
+'''
+matrix = [[0]]
 print_matrix(matrix)
 Solution().setZeroes(matrix)
 print_matrix(matrix)
