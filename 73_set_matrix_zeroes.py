@@ -16,7 +16,7 @@ class Solution:
         j = 0
         min_j = 0
 
-        print("MAtrix is %dx%d"%(len(matrix), len(matrix[0])))
+        #print("MAtrix is %dx%d"%(len(matrix), len(matrix[0])))
         
 
         # First move the rows up
@@ -27,10 +27,15 @@ class Solution:
                     # swap each cell of current row with that in `min_i`,
                     # storing the current row index in each cell of the current row
                     for k in range(0, len(matrix[0])):
+                        is_zero = matrix[i][k] == 0
                         matrix[i][k] = matrix[min_i][k]
 
-                        if matrix[min_i][k] != 0:
-                            matrix[min_i][k] = i if i > 0 else -1
+                        if is_zero:
+                            matrix[min_i][k] = 0 # so we catch it when we process columns in next for loop
+                        elif i == 0:
+                            matrix[min_i][k] = -1 # so we don't confuse it with '0'
+                        else:
+                            matrix[min_i][k] = i
                         
                     min_i += 1
 
@@ -39,16 +44,19 @@ class Solution:
                 j += 1
             i += 1
 
+        
+        #return
+
         # Next move the columns over
         i = 0
         j = 0
         while i < len(matrix):
-            print("i: ", i)
+            #print("i: ", i)
             j = min_j
             while j < len(matrix[0]):
-                print("j: ", j)
+                #print("j: ", j)
                 if matrix[i][j] == 0:
-                    print("FOUND AT (%d, %d)"%(i,j))
+                    #print("FOUND AT (%d, %d)"%(i,j))
 
                     # swap each cell of current column with that in `min_j`,
                     # storing the current row index in each cell of the current row
@@ -87,25 +95,27 @@ class Solution:
 
         print("min: (%d, %d)"%(min_i, min_j))
 
+
 '''
 matrix = [
   [1,1,1],
   [1,0,1],
   [1,1,1]
 ]
-'''
-'''
+
+
 matrix = [
   [0,1,2,0],
   [3,4,5,2],
   [1,3,1,5]
 ]
-'''
 matrix = [
   [0,1,2,0],
   [3,4,5,2],
   [1,3,1,0]
 ]
+'''
+matrix = [[0]]
 print(matrix)
 Solution().setZeroes(matrix)
 pprint(matrix)
