@@ -54,8 +54,8 @@ class Solution:
 
         #print_matrix(matrix)
         
-       # print("min: (%d, %d)"%(min_i, min_j))
-        #return
+        print("min: (%d, %d)"%(min_i, min_j))
+        return
         
 
         # Next move the columns over
@@ -150,10 +150,15 @@ matrix = [
     [0,0,1,1]
 ]
 matrix = [[0]]
-'''
+
 matrix = [[-4,-2147483648,6,-7,0],[-8,6,-8,-6,0],[2147483647,2,-9,-6,-10]]
+'''
+
+matrix = [[8,3,6,9,7,8,0,6],[0,3,7,0,0,4,3,8],[5,3,6,7,1,6,2,6],[8,7,2,5,0,6,4,0],[0,2,9,9,3,9,7,3]]
 
 print_matrix(matrix)
 Solution().setZeroes(matrix)
 print_matrix(matrix)
 
+print("-- EXPECTED --")
+print_matrix([[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,3,6,0,0,6,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]])
