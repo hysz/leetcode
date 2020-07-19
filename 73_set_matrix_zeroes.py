@@ -44,7 +44,9 @@ class Solution:
                 j += 1
             i += 1
 
+        #print_matrix(matrix)
         
+       # print("min: (%d, %d)"%(min_i, min_j))
         #return
 
         # Next move the columns over
@@ -69,20 +71,19 @@ class Solution:
             i += 1
 
         # Move columns back
-        i = min_i
-        j = 0
-        j = min_j - 1
-        while j >= 0:
-            col = matrix[min_i][j]
-            for i in range(min_i, len(matrix)):
-                matrix[i][j] = matrix[i][col]
-                matrix[i][col] = 0
-            j -= 1
+        if min_i < len(matrix):
+            j = min_j - 1
+            while j >= 0:
+                col = matrix[min_i][j]
+                for i in range(min_i, len(matrix)):
+                    matrix[i][j] = matrix[i][col]
+                    matrix[i][col] = 0
+                j -= 1
 
         # Move rows back
         i = min_i - 1
         while i >= 0:
-            row = matrix[i][0]
+            row = [cell for cell in matrix[i] if cell != 0][0]
             if row == -1:
                 row = 0
             for j in range(0, len(matrix[0])):
@@ -95,6 +96,12 @@ class Solution:
 
         print("min: (%d, %d)"%(min_i, min_j))
 
+
+
+def print_matrix(matrix):
+    for i in range(0, len(matrix)):
+        pprint(matrix[i])
+    print("-----")
 
 '''
 matrix = [
@@ -114,8 +121,17 @@ matrix = [
   [3,4,5,2],
   [1,3,1,0]
 ]
-'''
+
 matrix = [[0]]
-print(matrix)
+'''
+matrix = [
+    [0,0,0,5],
+    [4,3,1,4],
+    [0,1,1,4],
+    [1,2,1,3],
+    [0,0,1,1]
+]
+print_matrix(matrix)
 Solution().setZeroes(matrix)
-pprint(matrix)
+print_matrix(matrix)
+
