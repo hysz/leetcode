@@ -60,6 +60,27 @@ class Solution:
                 j += 1
             i += 1
 
+        # Move columns back
+        i = min_i
+        j = 0
+        j = min_j - 1
+        while j >= 0:
+            col = matrix[min_i][j]
+            for i in range(min_i, len(matrix)):
+                matrix[i][j] = matrix[i][col]
+                matrix[i][col] = 0
+            j -= 1
+
+        # Move rows back
+        i = min_i - 1
+        while i >= 0:
+            row = matrix[i][0]
+            if row == -1:
+                row = 0
+            for j in range(0, len(matrix[0])):
+                matrix[i][j] = matrix[row][j]
+                matrix[row][j] = 0
+            i -= 1
 
 
         
@@ -73,10 +94,17 @@ matrix = [
   [1,1,1]
 ]
 '''
+'''
 matrix = [
   [0,1,2,0],
   [3,4,5,2],
   [1,3,1,5]
+]
+'''
+matrix = [
+  [0,1,2,0],
+  [3,4,5,2],
+  [1,3,1,0]
 ]
 print(matrix)
 Solution().setZeroes(matrix)
