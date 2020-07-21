@@ -1,5 +1,4 @@
 from typing import List
-from functools import reduce
 
 class Solution:
     
@@ -22,7 +21,7 @@ class Solution:
             for n_combo in n_combos:
                 # Check if this combo equals zero.
                 sorted_three_combo = sorted([n] + n_combo)
-                if reduce(lambda a,b: a+b, sorted_three_combo, 0) != 0:
+                if sorted_three_combo[0] + sorted_three_combo[1] + sorted_three_combo[2] != 0:
                     continue
                 
                 # Check if we've already recorded this combo.
