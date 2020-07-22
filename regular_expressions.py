@@ -18,17 +18,17 @@ class State:
             return has_matched and self.next_state == None
         
         # Check what letter we're matching
-        print("letter: %s"%(self.letter))
-        print("has_matched: %s"%(has_matched))
+        # print("letter: %s"%(self.letter))
+        # print("has_matched: %s"%(has_matched))
         
         # Perform matching
         matched_letters = ""
         while s:
             c = s[:1]
             if c != self.letter and self.letter != '.':
-                print("%s != %s"%(c, self.letter))
+                # print("%s != %s"%(c, self.letter))
                 if not has_matched:
-                    print("done")
+                    # print("done")
                     return False
                 else:
                     break
@@ -40,7 +40,7 @@ class State:
             if self.count == 1:
                 break
 
-        print("done loop")
+        # print("done loop")
 
         # Check next
         if not self.next_state:
@@ -49,15 +49,15 @@ class State:
         # Iterate
         next_matched = self.next_state.match(s[:])
         if next_matched:
-            print("next matched!")
+            # print("next matched!")
             return True
 
         # if we did not match but this is a 0..many state, then try putting
         # matched letters back in and iterate.
         if not next_matched and self.count == -1:
-            print("matched letters: ", matched_letters)
+            # print("matched letters: ", matched_letters)
             for i in range(0, len(matched_letters)):
-                print("Trying '%s'"%(matched_letters[-(i+1):] + s[:]))
+                # print("Trying '%s'"%(matched_letters[-(i+1):] + s[:]))
                 next_matched = self.next_state.match(matched_letters[-(i+1):] + s[:])
                 if next_matched:
                     return True
@@ -83,29 +83,37 @@ class StateMachine:
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         state_machine = StateMachine.create(p)
-        print(state_machine)
+        if not p:
+            return not s
+        # print(state_machine)
         return state_machine.match(s)
     
 
 '''
-print(Solution().isMatch("a", "a"))
-print(Solution().isMatch("b", "a"))
-print(Solution().isMatch("aa", "a"))
-print(Solution().isMatch("aa", "a*"))
-print(Solution().isMatch("aab", "a*"))
+# print(Solution().isMatch("a", "a"))
+# print(Solution().isMatch("b", "a"))
+# print(Solution().isMatch("aa", "a"))
+# print(Solution().isMatch("aa", "a*"))
+# print(Solution().isMatch("aab", "a*"))
 
-print("FInal: " , Solution().isMatch("aa", "a*b"))
-print("FInal: " , Solution().isMatch("aab", "a*b"))
+# print("FInal: " , Solution().isMatch("aa", "a*b"))
+# print("FInal: " , Solution().isMatch("aab", "a*b"))
 '''
 
-#print("FInal: " , Solution().isMatch("aatb", "aa..*b"))
-#print("FInal: " , Solution().isMatch("aatbbbcd", "aa..*bbcd"))
+## print("FInal: " , Solution().isMatch("aatb", "aa..*b"))
+## print("FInal: " , Solution().isMatch("aatbbbcd", "aa..*bbcd"))
 
 
-#print("FInal: " , Solution().isMatch("a", "ab*a"))
+## print("FInal: " , Solution().isMatch("a", "ab*a"))
 
 
-#print("FInal: " , Solution().isMatch("ab", ".*"))
+## print("FInal: " , Solution().isMatch("ab", ".*"))
 
 
-print("FInal: " , Solution().isMatch("bbbba", ".*a*a"))
+# print("FInal: " , Solution().isMatch("bbbba", ".*a*a"))
+
+
+#print("FInal: " , Solution().isMatch("a", ""))
+#print("FInal: " , Solution().isMatch("", ""))
+
+print("FInal: " , Solution().isMatch("", ""))
