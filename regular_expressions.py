@@ -15,7 +15,13 @@ class State:
         
         # Base case - empty string
         if not s:
-            return has_matched and self.next_state == None
+            if not has_matched:
+                return False
+
+            if self.next_state:
+                return self.next_state.match(s)
+
+            return True
         
         # Check what letter we're matching
         # print("letter: %s"%(self.letter))
@@ -116,4 +122,6 @@ class Solution:
 #print("FInal: " , Solution().isMatch("a", ""))
 #print("FInal: " , Solution().isMatch("", ""))
 
-print("FInal: " , Solution().isMatch("", ""))
+print("FInal: " , Solution().isMatch("", "c*c*"))
+
+print("FInal: " , Solution().isMatch("a", "ab*"))
