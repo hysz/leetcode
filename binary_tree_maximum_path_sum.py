@@ -23,17 +23,20 @@ class Solution:
         left = self.run(node.left)
         right = self.run(node.right)
 
+
         #print(left)
         #print(right)
 
         # compute local stats
-        single = node.val + max(left.single, right.single)
+        single = max(node.val, node.val + max(left.single, right.single))
         combined = node.val + left.single + right.single
         max_local = sorted([single, combined, node.val])[-1]
 
         # update global max
         max_global = sorted([max_local, left.max_global, right.max_global])[-1]
-        return Stats(single, combined, max_local, max_global)        
+        stats = Stats(single, combined, max_local, max_global)  
+        #print(stats)
+        return stats      
 
     def maxPathSum(self, root: TreeNode) -> int:
         stats = self.run(root)
@@ -41,7 +44,14 @@ class Solution:
 
 
 
-print(Solution().maxPathSum(TreeNode(2, TreeNode(-1), TreeNode(-2))))
+print(Solution().maxPathSum(TreeNode(9, TreeNode(6), TreeNode(-3, TreeNode(-6), TreeNode(2, TreeNode(2, TreeNode(-6, TreeNode(-6)), TreeNode(-6)))))))
+
+
+#print(Solution().maxPathSum(TreeNode(9, TreeNode(6), TreeNode(-3, TreeNode(-6), TreeNode(2, TreeNode(2, TreeNode(-6, TreeNode(-6), TreeNode(-6))))))))
+
+
+
+#print(Solution().maxPathSum(TreeNode(2, TreeNode(-1), TreeNode(-2))))
 #print(Solution().maxPathSum(TreeNode(-2, TreeNode(-1))))
 #print(Solution().maxPathSum(TreeNode(1, TreeNode(2))))
 #print(Solution().maxPathSum(TreeNode(1, TreeNode(2), TreeNode(3))))
