@@ -22,8 +22,21 @@ class Solution:
         
         # merge, using "merge" step from mergesort.
         for l2 in lists:
-            l1 = master
-            last = master
+            if not l2:
+                continue
+
+            # we want to set it up such that l1.val <= l2.val for the first entry,
+            # otherwise we have to think about adjusting the `master` in the merge step below.
+            l1 = None
+            if l2.val < master.val:
+                l1 = l2
+                l2 = master
+                master = l1
+            else:
+                l1 = master
+            
+            # merge 'em. We set `last = None` because we know that l1.val <= l2.val on the first iteration.
+            last = None
             while l1 and l2:
                 #print("%d <= %d"%(l1.val, l2.val))
                 if l1.val <= l2.val:
@@ -45,6 +58,7 @@ class Solution:
 
 #print(Solution().mergeKLists([ListNode(1), ListNode(2)]))
 #print(Solution().mergeKLists([ListNode(1, ListNode(3)), ListNode(2)]))
-#print(Solution().mergeKLists([ListNode(1, ListNode(3)), ListNode(1, ListNode(2))]))
-print(Solution().mergeKLists([]))
-print(Solution().mergeKLists([None,ListNode(1)]))
+print(Solution().mergeKLists([ListNode(1, ListNode(3)), ListNode(1, ListNode(2))]))
+#print(Solution().mergeKLists([]))
+#print(Solution().mergeKLists([None,ListNode(1)]))
+#print(Solution().mergeKLists([ListNode(1), ListNode(0)]))
