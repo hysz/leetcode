@@ -16,11 +16,6 @@ class Solution:
         print("parent 1 - ", parent1)
         print("parent 2 - ", parent2)
 
-        # swapping nodes is messy ... There are four cases.
-        # 1. Swapping adjacent nodes.
-        # 2. Swapping non-adjacent nodes.
-        # 3. Swapping nodes where the 2nd node is the end of the list.
-
         child1 = parent1.next
         child2 = parent2.next
 
@@ -43,29 +38,50 @@ class Solution:
  
         
 
-        fakehead = top = ListNode(9999999, head)
-        for i in range(k, 0, -2):
-            print(i)
-            # iterate to the (n-1)th node. We'll alter its `next`
-            
-            node = top
-            while node and i > 1:
-                node = node.next
-                i -= 1
-                
-            # couldn't countdown k
-            if i > 1:
-                break
-                
-            print("stop at %s"%(node))
+        fakehead = ListNode(9999999, head)
 
-            Solution.swapNodes(top, node)
+        next_top = fakehead
+        while next_top:
+            top = next_top
+            print("Starting NYA")
+            for current_k in range(k, 0, -2):
+                print("TOP: ", top)
+                print("Current K: ", current_k)
+                # iterate to the (n-1)th node. We'll alter its `next`
+                
+                node = top
+                i = current_k
+                while node and i > 1:
+                    node = node.next
+                    i -= 1
+                    
+                # couldn't countdown k
+                if i > 1:
+                    break
+                    
+                print("stop at %s"%(node))
 
-            # iterate top
-            top = top.next if top else head.next
+                Solution.swapNodes(top, node)
+
+                # iterate top
+                top = top.next
+
+                if current_k == k:
+                    next_top = node.next
+            break
             
         return fakehead.next
 
 
 #print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3))), 2))
-print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 3))
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 3))
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 4))
+
+# Test reversing twice for one k group
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 4))
+
+# Test reversing thrice for one k group
+print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6)))))), 6))
+
+
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 2))
