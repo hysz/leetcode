@@ -36,8 +36,6 @@ class Solution:
         # seems kinda like 
         curk = k
  
-        
-
         fakehead = ListNode(9999999, head)
 
         next_top = fakehead
@@ -56,7 +54,8 @@ class Solution:
                     i -= 1
                     
                 # couldn't countdown k
-                if i > 1:
+                if i != 1 or not node.next:
+                    next_top = None
                     break
                     
                 print("stop at %s"%(node))
@@ -82,5 +81,8 @@ class Solution:
 # Test reversing thrice for one k group
 #print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6)))))), 6))
 
+# Test reversing two groups.
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 2))
 
-print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 2))
+# Test reversing one group with an extra nod at the end.
+print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3))), 2))
