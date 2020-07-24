@@ -16,28 +16,25 @@ class Solution:
         print("parent 1 - ", parent1)
         print("parent 2 - ", parent2)
 
+        # swapping nodes is messy ... There are four cases.
+        # 1. Swapping adjacent nodes.
+        # 2. Swapping non-adjacent nodes.
+        # 3. Swapping nodes where the 2nd node is the end of the list.
+
         child1 = parent1.next
         child2 = parent2.next
 
         print("c1: ", child1)
         print("c2: ", child2)
 
-        # swap grandchildren
+        # swap parents -- important to swap parents first!
+        parent1.next = child2
+        parent2.next = child1 if parent2 != child1 else parent2.next
+
+        # swap grandchildren 
         child1_next = child1.next
         child1.next = child2.next
         child2.next = child1_next if child1_next != child2 else child1
-
-        print("c1': ", child1)
-        print("c2': ", child2)
-
-        # swap children
-        print("parent 1 - ", parent1)
-        parent1.next = child2
-        print("parent1': ", parent1)
-        
-        print("parent 2 - ", parent2)
-        parent2.next = child1 if parent2 != child1 else parent2.next
-        print("parent2': ", parent2)
         
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
         
@@ -70,4 +67,5 @@ class Solution:
         return fakehead.next
 
 
-print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3))), 2))
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3))), 2))
+print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 3))
