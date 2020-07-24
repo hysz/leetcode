@@ -41,7 +41,7 @@ class Solution:
         fakehead = ListNode(9999999, head)
 
         next_top = fakehead
-        while next_top:
+        while next_top and next_top.next:
             top = next_top
             print("Starting NYA")
             for current_k in range(k, 0, -2):
@@ -67,8 +67,7 @@ class Solution:
                 top = top.next
 
                 if current_k == k:
-                    next_top = node.next
-            break
+                    next_top = node
             
         return fakehead.next
 
@@ -81,7 +80,7 @@ class Solution:
 #print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 4))
 
 # Test reversing thrice for one k group
-print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6)))))), 6))
+#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6)))))), 6))
 
 
-#print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 2))
+print(Solution().reverseKGroup(ListNode(1, ListNode(2, ListNode(3, ListNode(4)))), 2))
