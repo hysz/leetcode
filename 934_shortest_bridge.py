@@ -13,9 +13,12 @@ class Solution:
         # Fetch our islands
         for i in range(len(grid)):
             for j in range(len(grid[i])):
+                # See if this square has an unprocessed island.
                 if grid[i][j] <= 0:
                     continue
                 
+                # Run a cheeky breadth-first search starting from [i,j] to other
+                # squares that belong to this island.
                 squares = [[i,j]]
                 while len(squares) > 0:
                     square = squares.pop(0)
@@ -23,8 +26,10 @@ class Solution:
                         continue
                     
                     islands[idx].append([square[0], square[1]])
-                    grid[square[0]][square[1]] = -1 * (idx + 1)
+                    grid[square[0]][square[1]] = -1 * (idx + 1) # Tag our square as part of island in grid.
 
+                    # These are the possible squares we can check. Note that we will add duplicates, but 
+                    # they will not be reprocessed.
                     if square[0] > 0:
                         squares.append([square[0] - 1, square[1]])
                     if square[1] > 0:
@@ -34,6 +39,7 @@ class Solution:
                     if square[1] < len(grid[i]) - 1:
                         squares.append([square[0], square[1] + 1])
 
+                # Increment island index
                 idx += 1  
             
         # pp.pprint(grid)
